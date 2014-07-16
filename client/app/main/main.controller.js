@@ -1,7 +1,7 @@
 'use strict';
 
 
-//http://repl.it/VXf/11
+//http://repl.it/VXf/13
 var c = function (input) {console.log(input);}
 
 angular.module('angelApp')
@@ -13,22 +13,22 @@ angular.module('angelApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
-    var scrub = function (inputObject, skillsHash) {
-      var length = inputObject.jobs.length;
-      while (length--) {
-        var tags = inputObject.jobs[length].tags;
-        var tagsLength = tags.length;
-        while (tagsLength--) {
-          if (tags[tagsLength].tag_type === "SkillTag") {
-            if (skillsHash[tags[tagsLength].display_name]) {
-              skillsHash[tags[tagsLength].display_name]++;
-            } else {
-              skillsHash[tags[tagsLength].display_name] = 1;
-            }
-          }
-        }
-      }
-    };
+    // var scrub = function (inputObject, skillsHash) {
+    //   var length = inputObject.jobs.length;
+    //   while (length--) {
+    //     var tags = inputObject.jobs[length].tags;
+    //     var tagsLength = tags.length;
+    //     while (tagsLength--) {
+    //       if (tags[tagsLength].tag_type === "SkillTag") {
+    //         if (skillsHash[tags[tagsLength].display_name]) {
+    //           skillsHash[tags[tagsLength].display_name]++;
+    //         } else {
+    //           skillsHash[tags[tagsLength].display_name] = 1;
+    //         }
+    //       }
+    //     }
+    //   }
+    // };
 
     $scope.addThing = function() {
       if($scope.newThing === '') {
@@ -74,143 +74,176 @@ angular.module('angelApp')
       });
     }
 
-    $scope.results = { 'Angular.JS': 3,
-      'Front-End Development': 1,
-      jQuery: 4,
-      CSS: 3,
-      HTML: 4,
-      'Web Analytics': 1,
-      'UI/UX Design': 2,
-      'User Interface Design': 3,
-      Databases: 1,
-      'Web Development': 1,
-      'Information Security': 1,
-      'Software Development': 1,
-      'User Experience Design': 7,
-      'Information Technology': 1,
-      'Web Design': 3,
-      'Ruby on Rails': 4,
-      'iOS Development / Objective-C (Cocoa Touch)': 2,
-      'Mobile Application Development': 3,
-      'Mobile Development': 2,
-      'Objective C': 1,
-      SOA: 1,
-      'Engineering Management': 1,
-      'Technical Leadership': 1,
-      'Scalable Systems': 1,
-      Ruby: 1,
-      'Team Building': 2,
-      'E-Commerce': 1,
-      'Internet Browsing': 1,
-      'iOS Development': 3,
-      'HTML5 & CSS3': 5,
-      Javascript: 10,
-      Python: 3,
-      Mootools: 1,
-      PostgreSQL: 2,
-      PHP: 3,
-      'Sales and Marketing': 8,
-      'Operations Management': 1,
-      'Human Resources': 2,
-      'Business Operations': 1,
-      'Famo.us': 1,
-      iOS: 2,
-      'Adobe Illustrator': 2,
-      'Adobe Photoshop': 2,
-      'Adobe Creative Suite': 1,
-      Fireworks: 1,
-      'Mobile Application Design': 2,
-      'Press Release Writing': 1,
-      'Press and Corporate Communications': 1,
-      'Marketing Management': 1,
-      'Social Media Marketing': 3,
-      'Product Marketing': 3,
-      Marketing: 1,
-      'Twitter Marketing': 1,
-      'Facebook Advertising': 1,
-      Urbuntu: 1,
-      'Amazon AWS': 1,
-      Unix: 1,
-      Linux: 1,
-      'Slim Framework': 1,
-      'Underscore.js': 1,
-      Smarty: 1,
-      'Backbone.js': 3,
-      Mobile: 2,
-      Polymer: 1,
-      Jetty: 1,
-      'Twitter Bootstrap': 1,
-      Go: 1,
-      Scala: 2,
-      Perl: 1,
-      AWS: 1,
-      'Facebook API': 1,
-      'Twitter API': 1,
-      'Node.js': 2,
-      MongoDB: 2,
-      Java: 2,
-      'Process Flows/Wireframes': 1,
-      'Contextual Inquiry': 1,
-      Personas: 1,
-      'User Research': 1,
-      'Data Scientist': 1,
-      R: 1,
-      'Grid Systems': 1,
-      Iconography: 1,
-      Typography: 1,
-      'Print Design': 1,
-      'Data Visualization': 1,
-      'Adobe Premiere': 1,
-      Mockups: 1,
-      Dribbble: 1,
-      'Adobe After Effects': 1,
-      'iPhone / iPad Development': 1,
-      'Brand and Identity Design': 1,
-      'HTML/CSS/PHP/MYSQL': 2,
-      AJAX: 1,
-      'Tech Savvy': 1,
-      Leadership: 2,
-      Entrepreneurship: 1,
-      'Growth Hacking': 1,
-      'Word of Mouth Marketing': 1,
-      'Business Development': 4,
-      'Customer Service': 1,
-      Design: 1,
-      'Graphic Design': 1,
-      Payroll: 1,
-      Accounting: 1,
-      Finance: 1,
-      'SaaS Design': 1,
-      'Data Science': 1,
-      Analytics: 1,
-      'Enterprise Software': 1,
-      SaaS: 1,
-      'Big Data': 1,
-      'Product Management': 2,
-      'Machine Learning': 1,
-      'Data Mining': 1,
-      'Sales/Marketing and Strategic Partnerships': 1,
-      'Online Marketing Strategy': 1,
-      'Online Marketing': 1,
-      'Mobile Advertising': 1,
-      'Consumer Internet': 1,
-      Distribution: 1,
-      'Amazon Web Services': 1,
-      'Project Management': 1,
-      Wordpress: 1,
-      'Product Development': 1,
-      'Sales and Account Management': 1,
-      Sales: 3,
-      'Sales Development': 1,
-      'Sales Strategy and Management': 1,
-      'Office Management': 1,
-      Interviewing: 1,
-      Recruiting: 1
-    }
+    $scope.results = [
+      { name: 'Angular.JS', value: 3 },
+      { name: 'Front-End Development', value: 2 },
+      { name: 'jQuery', value: 4 },
+      { name: 'CSS', value: 6 },
+      { name: 'HTML', value: 6 },
+      { name: 'SOA', value: 1 },
+      { name: 'Engineering Management', value: 1 },
+      { name: 'Technical Leadership', value: 1 },
+      { name: 'Scalable Systems', value: 1 },
+      { name: 'Ruby', value: 3 },
+      { name: 'Team Building', value: 1 },
+      { name: 'E-Commerce', value: 1 },
+      { name: 'HTML5 & CSS3', value: 4 },
+      { name: 'Javascript', value: 14 },
+      { name: 'Python', value: 7 },
+      { name: 'Mootools', value: 1 },
+      { name: 'PostgreSQL', value: 2 },
+      { name: 'PHP', value: 9 },
+      { name: 'Famo.us', value: 1 },
+      { name: 'Ruby on Rails', value: 6 },
+      { name: 'User Experience Design', value: 1 },
+      { name: 'Urbuntu', value: 1 },
+      { name: 'Amazon AWS', value: 1 },
+      { name: 'Unix', value: 3 },
+      { name: 'Linux', value: 3 },
+      { name: 'Slim Framework', value: 1 },
+      { name: 'Underscore.js', value: 1 },
+      { name: 'Smarty', value: 1 },
+      { name: 'Backbone.js', value: 3 },
+      { name: 'Mobile', value: 2 },
+      { name: 'Polymer', value: 1 },
+      { name: 'Jetty', value: 1 },
+      { name: 'Twitter Bootstrap', value: 1 },
+      { name: 'Go', value: 1 },
+      { name: 'Scala', value: 2 },
+      { name: 'Perl', value: 1 },
+      { name: 'AWS', value: 2 },
+      { name: 'Facebook API', value: 1 },
+      { name: 'Twitter API', value: 1 },
+      { name: 'Node.js', value: 4 },
+      { name: 'MongoDB', value: 3 },
+      { name: 'Java', value: 3 },
+      { name: 'iOS Development', value: 1 },
+      { name: 'iOS', value: 1 },
+      { name: 'Data Scientist', value: 1 },
+      { name: 'R', value: 1 },
+      { name: 'HTML/CSS/PHP/MYSQL', value: 2 },
+      { name: 'AJAX', value: 4 },
+      { name: 'Software Design (OOP & Functional Styles)', value: 1 },
+      { name: 'C, C++, Python, Shell scripting, Linux/Unix, Qt, OpenGL', value: 1 },
+      { name: 'Shell Scripting', value: 1 },
+      { name: 'Ruby\\Rails', value: 1 },
+      { name: 'ORM', value: 1 },
+      { name: 'OOP', value: 1 },
+      { name: 'Mvc', value: 1 },
+      { name: 'Zend Framework', value: 1 },
+      { name: 'Git', value: 1 },
+      { name: 'MySQL', value: 3 },
+      { name: 'Go Language', value: 1 },
+      { name: 'Memcached', value: 1 },
+      { name: 'Cassandra', value: 1 },
+      { name: 'Redis', value: 1 },
+      { name: 'Agile Software Develoment', value: 1 },
+      { name: 'SQL', value: 1 },
+      { name: 'LAMP Development', value: 1 },
+      { name: 'Symfony', value: 1 },
+      { name: 'University Degree In The Field Of Computer Science', value: 1 },
+      { name: 'Proven Leader With Demonstrated Success In Hiring And Growing A High Performing, Collaborative, And Results Oriented Technology Team',
+        value: 1 },
+      { name: 'Excellent Written And Oral Communication Skills And Strong Interpersonal Skills',
+        value: 1 },
+      { name: 'Passion For Using Technology To Improve Education And Help People Learn And Teach',
+        value: 1 },
+      { name: 'Experience Managing Web Application Development (Html5 Products A Plus)',
+        value: 1 },
+      { name: 'Scripting in Perl', value: 1 },
+      { name: 'Bash Scripting', value: 1 },
+      { name: 'RESTful Services', value: 2 },
+      { name: 'Troubleshooting & Problem Solving', value: 1 },
+      { name: 'Documentation', value: 1 },
+      { name: 'Technical Support', value: 1 },
+      { name: 'CMS', value: 1 },
+      { name: 'Web Development', value: 1 },
+      { name: 'Customer Service', value: 1 },
+      { name: 'Web Design', value: 1 },
+      { name: 'JSON', value: 1 },
+      { name: 'Digital Media', value: 1 },
+      { name: 'Linux Development', value: 1 },
+      { name: 'Compilers', value: 1 },
+      { name: 'GUI Development', value: 1 },
+      { name: 'Web Applications', value: 1 },
+      { name: 'REST APIs', value: 1 },
+      { name: 'OAuth APIs', value: 1 },
+      { name: 'Amazon EC2', value: 1 },
+      { name: 'APIs', value: 1 },
+      { name: 'Elastic Search ', value: 1 },
+      { name: 'Apache Solr', value: 1 },
+      { name: 'Semantic Search', value: 1 },
+      { name: 'Search', value: 1 }
+    ];
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    var chartObject = {
+      max: Math.max()
+    }
+
+$(function () {
+
+      // Radialize the colors
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+        return {
+            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+
+    // Build the chart
+$('#container').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+    },
+    title: {
+        text: 'Most in demand developer skills on Angel List'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                },
+                connectorColor: 'silver'
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Top 10 share',
+        data: [
+            ['Javascript',   14/64],
+            ['PHP',       9/64],
+            ['Python',    7/64],
+            ['CSS',     6/64],
+            ['HTML',   6/64],
+            ['Ruby on Rails', 6/64],
+            ['AJAX', 4/64],
+            ['jQuery', 4/64],
+            ['Node.js', 4/64],
+            ['HTML5 & CSS3', 4/64]
+        ]
+    }]
+});
+});
+
+
 
 
   });
