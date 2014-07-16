@@ -20,4 +20,5 @@ To do
 * Use some kind of language search plugin to merge similar types (HTML, CSS, HTML5 and CSS3)
 * Make Object Sorting function work with object['multi word key']
 * Talk to Sadie about Web 2.0 design principles
+* Parallax Scrolling
 
