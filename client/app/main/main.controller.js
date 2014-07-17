@@ -44,6 +44,11 @@ angular.module('angelApp')
         return skillsHash;
     };
 
+    $scope.addAllJobs = function () {
+      $http.post('/api/jobs');
+      console.log('/api/jobs post made');
+    }
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
