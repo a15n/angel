@@ -15,11 +15,11 @@ exports.index = function(req, res) {
 
 // Get a single job
 exports.show = function(req, res) {
-  Job.findById(req.params.id, function (err, job) {
-    if(err) { return handleError(res, err); }
-    if(!job) { return res.send(404); }
-    return res.json(job);
-  });
+  var role = req.params.id;
+  Job.find({roleTags: role}, function(error, data) {
+    console.log(data);
+    res.send(data);
+  })
 };
 
 // Creates a new job in the DB.
@@ -71,7 +71,6 @@ exports.create = function(req, res) {
       }
     })
   }
-
   request('https://api.angel.co/1/jobs?page=1', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var data = JSON.parse(body);

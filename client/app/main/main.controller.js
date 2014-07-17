@@ -17,36 +17,25 @@ angular.module('angelApp')
         if (typeof inputObject !== "object" || typeof role !== "string"){
             throw "input object and/or role missing/incorrect";
         }
-        var i = inputObject.jobs.length;
-        while (i--) {
-            var tags = inputObject.jobs[i].tags;
-            var tagsLength = tags.length;
-            var tagRole;
-            while (tagsLength--) {
-                var tag = tags[tagsLength];
-                if (tag.tag_type === "RoleTag") {
-                    tagRole = tag.name;
-                }
-            }
-            tagsLength = tags.length;
-            if (role === tagRole) {
-                while (tagsLength--) {
-                    if (tags[tagsLength].tag_type === "SkillTag") {
-                        if (skillsHash[tags[tagsLength].display_name]) {
-                            skillsHash[tags[tagsLength].display_name]++;
-                        } else {
-                            skillsHash[tags[tagsLength].display_name]= 1;
-                        }
-                    }
-                }
-            }
-        }
-        return skillsHash;
+        var tagIndex = inputObject.skillTags.length;
+        console.log(tagIndex);
+        // while (tagIndex--) {
+        //   if (skillsHash[tags[tagIndex].display_name]) {
+        //     skillsHash[tags[tagIndex].display_name]++;
+        //   } else {
+        //     skillsHash[tags[tagIndex].display_name]= 1;
+        //   }
+        // }
     };
 
+    $scope.current = {};
+
     $scope.addAllJobs = function () {
-      $http.post('/api/jobs');
-      console.log('/api/jobs post made');
+      if (confirm("are you sure?") == true) {
+        $http.post('/api/jobs');
+        console.log('/api/jobs post made');
+      }
+
     }
 
     $scope.addThing = function() {
@@ -61,23 +50,32 @@ angular.module('angelApp')
       $http.delete('/api/things/' + thing._id);
     };
 
-    $scope.getJobs = function(){
-      var length;
-      $scope.skillsHash = {};
-      $http.jsonp('https://api.angel.co/1/jobs?page=1&callback=JSON_CALLBACK')
+    // $scope.getJobs = function(){
+    //   var length;
+    //   $scope.skillsHash = {};
+    //   $http.jsonp('https://api.angel.co/1/jobs?page=1&callback=JSON_CALLBACK')
+    //   .success(function(data){
+    //     // length = data.last_page;
+    //     length = 1;
+    //     jobScrub(data, $scope.skillsHash, 'developer');
+    //     while (length > 1) {
+    //       length--;
+    //       $http.jsonp('https://api.angel.co/1/jobs?page=' + length + '&callback=JSON_CALLBACK')
+    //       .success(function(data) {
+    //         jobScrub(data, $scope.skillsHash, 'developer')
+    //         c($scope.skillsHash);
+    //       })
+    //     }
+    //   });
+    // }
+
+    $scope.getSkills = function (role) {
+      $http.get('/api/jobs/' + role)
       .success(function(data){
-        // length = data.last_page;
-        length = 1;
-        jobScrub(data, $scope.skillsHash, 'developer');
-        while (length > 1) {
-          length--;
-          $http.jsonp('https://api.angel.co/1/jobs?page=' + length + '&callback=JSON_CALLBACK')
-          .success(function(data) {
-            jobScrub(data, $scope.skillsHash, 'developer')
-            c($scope.skillsHash);
-          })
-        }
-      });
+        data.forEach(function(element, index, array){
+          jobScrub(data[index], $scope.current, role);
+        })
+      })
     }
 
     $scope.results = [
